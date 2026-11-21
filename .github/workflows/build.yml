@@ -1,0 +1,30 @@
+
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/build.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Show project files
+        run: |
+          echo "Repository files:"
+          ls -la
+          echo "An Android Gradle project is needed to build an APK."
